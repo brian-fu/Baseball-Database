@@ -1,8 +1,9 @@
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Frame extends JFrame {
     
@@ -10,13 +11,13 @@ public class Frame extends JFrame {
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        JLabel title = placeImage("title.png", 0.29, 0.27);
+        JLabel title = placeImage("title.png", 0.163, 0.2);
         this.add(title);
 
-        JLabel startIcon = placeImage("startIcon.png", 0.409, 0.146);
+        JLabel startIcon = placeImage("startIcon.png", 0.32, 0.04);
         this.add(startIcon);
 
-        JLabel startButton = placeImage("startButton3.png", 0.45, 0.5);
+        JLabel startButton = placeImage("startButton.png", 0.43, 0.5);
         this.add(startButton);
 
         ImageIcon icon = new ImageIcon("icon.png");
@@ -37,13 +38,25 @@ public class Frame extends JFrame {
         double screenHeight = screenSize.getHeight();
         double screenWidth = screenSize.getWidth();
         
-        JLabel label = new JLabel();
+        // JLabel label = new JLabel();
         ImageIcon image = new ImageIcon(file);
+        
         int imageWidth = image.getIconWidth();
         int imageHeight = image.getIconHeight();
-        label.setIcon(image);
-        label.setBounds((int)(screenWidth*widthMultiplier), (int)(screenHeight*heightMultiplier), imageWidth, imageHeight);
-        
-        return label;
+
+        try {
+            BufferedImage tempImage = ImageIO.read(getClass().getResource(file));
+            Image resizedImage = tempImage.getScaledInstance((int)((imageWidth/screenWidth)*900), (int)((imageHeight/screenHeight)*600), Image.SCALE_SMOOTH);
+            JLabel label = new JLabel(new ImageIcon(resizedImage));
+
+            // label.setIcon(image);
+            label.setBounds((int)(screenWidth*widthMultiplier), (int)(screenHeight*heightMultiplier), imageWidth, imageHeight);
+
+            return label;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
