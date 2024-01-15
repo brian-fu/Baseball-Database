@@ -1,3 +1,0 @@
-playerID,firstName,lastName,jerseyNumber,teamNumber,gamesPlayed,atBats,runs,hits,singles,doubles,triples,homeRuns,rbi,walks,strikeouts,stolenBases,basesAdvanced,inningsPitched,strikeoutsPitched,walksAllowed,hitsAllowed,homeRunsAllowed,walksHitsPerInning,hitterAverageAgainst,battingAverage,onBasePercentage,sluggingPercentage,onBasePlusSlugging
-1,Brian,Fu,24,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0
-2,Christopher,Min,13,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0
