@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args){
 
         HashMap<Integer, Player> players = new HashMap<>();
+        HashMap<Integer, Team> league = new HashMap<>();
+        
         players = FileReaderPlayer.reader(players, playersFile);
 
         /* PRINT ENTIRE PLAYER HASHMAP
@@ -17,16 +19,19 @@ public class Main {
         }
         */
 
-        HashMap<Integer, Team> teams = new HashMap<>();
-        teams = FileReaderTeam.reader(players, teamsFile);
+        league = FileReaderTeam.reader(players, teamsFile);
         
         FileWriterPlayer.writer(players, playersFile);
 
-        teams.get(1).addWin();
-        teams.get(2).addLoss();
+        league.get(1).addWin();
+        league.get(2).addLoss();
 
-        System.out.println(teams.get(1).getRosterHashMap().get(1));
-        System.out.println(teams.get(2).getRosterHashMap().get(2));
-        FileWriterTeam.writer(teams, teamsFile);
+        System.out.println(league.get(1).getRosterHashMap().get(1));
+        System.out.println(league.get(2).getRosterHashMap().get(2));
+        FileWriterTeam.writer(league, teamsFile);
+    }
+
+    public static void getStandings(){
+        
     }
 }
