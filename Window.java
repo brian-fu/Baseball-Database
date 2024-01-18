@@ -23,8 +23,8 @@ public class Window {
 
     }
 
-    public void add(Component component) {
-        window.add(component);
+    public void add(VisualElement element) {
+        window.add(element.getComponent());
         window.setVisible(true);
     }
 

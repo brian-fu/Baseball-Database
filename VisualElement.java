@@ -1,19 +1,14 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.*;
 
 public class VisualElement {
 
@@ -107,31 +102,6 @@ public class VisualElement {
     public void setBackground(Color background) {
         this.background = background;
     }  
-
-    /* 
-    public static Color StringToColor(String color) { //TODO make in less monkey way
-        if (color == null) {
-            return Color.GRAY;
-        }
-        switch (color) {
-            case "WHITE":
-                return Color.WHITE;
-            case "RED":
-                return Color.RED;
-            case "GREEN":
-                return Color.GREEN;
-            case "YELLOW":
-                return Color.YELLOW;
-            case "ORANGE":
-                return Color.ORANGE;
-            case "BLUE":
-                return Color.BLUE;
-            default:
-                System.out.println("COLOR INPUT NOT VALID");
-                return Color.GRAY;
-        }
-    }
-    */
 }
 
 class Picture extends VisualElement {
@@ -172,6 +142,45 @@ class InteractablePicture extends VisualElement {
     }
 }
 
+class TextField extends VisualElement {
+    protected JTextField textField;
+
+    public TextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
+        super(id, xPosition, yPosition, width, height, bgColor);
+        this.type = "Text Field";
+
+        textField = new JTextField();
+        textField.setFont(font);
+        this.component = textField;
+        makeVisible();
+    }
+
+    public String getText() {
+        return textField.getText();
+    }
+
+    public void emptyText() {
+        textField.setText(null);
+    }
+}
+
+class TextArea extends VisualElement {
+    protected JTextArea textArea;
+
+    public TextArea(String id, String text, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, Color textColor) {
+        super(id, xPosition, yPosition, width, height, bgColor);
+        this.type = "Text Area";
+
+        textArea = new JTextArea(text);
+        textArea.setFont(font);
+        textArea.setForeground(textColor);
+        textArea.setEditable(false);
+
+        this.component = textArea;
+        makeVisible();
+    }
+}
+
 class WindowChangePicture extends InteractablePicture {
     protected String targetWindow;
 
@@ -184,6 +193,16 @@ class WindowChangePicture extends InteractablePicture {
     }
 }
 
+class TeamExtractPicture extends InteractablePicture {
+    protected String teamName;
+
+    public TeamExtractPicture(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "ExtractTextPicture";
+
+        imageButton.setActionCommand("EXTRACT TEAM NAME");
+    }
+}
 
 class InteractableObject extends VisualElement {
 
