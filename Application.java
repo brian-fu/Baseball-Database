@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Application implements ActionListener {
 
@@ -22,6 +23,8 @@ public class Application implements ActionListener {
     public static Font subtitleFont = new Font("Osaka", Font.BOLD, 30);
 
     public static TextField teamName = new TextField("teamNameField", 1130, 600, 300, 80, Color.WHITE, subtitleFont);
+
+    public static ArrayList<String> teamList = new ArrayList<String>();
 
     public void runApplication() throws IOException {
         frame = new JFrame("Softball Tracker!");
@@ -119,6 +122,13 @@ public class Application implements ActionListener {
 
         else if (command.contains("EXTRACT TEAM NAME")) {
             String newTeamName = teamName.getText();
+            for (int i = 0; i < teamList.size(); i++) {
+                if (teamList.get(i) == newTeamName) {
+                    // Create some kind of indicator (I will do it)
+                    return;
+                }
+            }
+            teamList.add(newTeamName);
             teamName.emptyText();
         }
     }
