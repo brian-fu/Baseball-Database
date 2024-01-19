@@ -36,7 +36,7 @@ public class Application implements ActionListener {
 
     public static String currentTeam;
 
-    // Window 3 Components
+    // Window 3 Text Field Components
 
     public static TextField firstNameField = new TextField("firstName", 155, 530, 250, 70, Color.WHITE, littleFont);
     public static TextField lastNameField = new TextField("lastName", 155, 750, 250, 70, Color.WHITE, littleFont);
@@ -60,10 +60,36 @@ public class Application implements ActionListener {
 
     public static TextField inningsField = new TextField("innings", 690, 1060, 250, 70, Color.WHITE, littleFont);
     public static NumberTextField runsGivenUpField = new NumberTextField("runsgivenup", 1070, 1060, 330, 70, Color.WHITE, littleFont);
-    public static NumberTextField strikeoutsAgainstField = new NumberTextField("strikeoutsAgainst", 1520, 1060, 290, 70, Color.WHITE, littleFont);
+    public static NumberTextField strikeoutsThrownField = new NumberTextField("strikeoutsThrown", 1520, 1060, 290, 70, Color.WHITE, littleFont);
     public static NumberTextField walksAgainstField = new NumberTextField("walksAgainst", 1920, 1060, 235, 70, Color.WHITE, littleFont);
     public static NumberTextField hitsAgainstField = new NumberTextField("hitsAgainst", 2240, 1060, 200, 70, Color.WHITE, littleFont);
 
+    // Window 5 Text Field Components
+
+    NumberTextField gamesPlayedStat = new NumberTextField("Player GamesPlayed", 870, 910, 190, 50, Color.WHITE, littleFont);
+    NumberTextField plateAppearancesStat = new NumberTextField("Plate Apperances", 1320, 910, 220, 50, Color.WHITE, littleFont);
+    NumberTextField runsStat = new NumberTextField("Runs", 1580, 910, 190, 50, Color.WHITE, littleFont);
+    NumberTextField hitsStat = new NumberTextField("Hits", 1820, 910, 190, 50, Color.WHITE, littleFont);
+    NumberTextField singlesStat = new NumberTextField("Singles", 2050, 910, 190, 50, Color.WHITE, littleFont);
+    NumberTextField doublesStat = new NumberTextField("Doubles", 870, 1020, 190, 50, Color.WHITE, littleFont);
+    NumberTextField triplesStat = new NumberTextField("Triples", 1100, 1020, 180, 50, Color.WHITE, littleFont);
+    NumberTextField homerunsStat = new NumberTextField("Homeruns", 1320, 1020, 220, 50, Color.WHITE, littleFont);
+    NumberTextField rbisStat = new NumberTextField("RBIs", 1580, 1020, 190, 50, Color.WHITE, littleFont);
+    NumberTextField walksStat = new NumberTextField("Walks", 1820, 1020, 190, 50, Color.WHITE, littleFont);
+    NumberTextField hbpStat = new NumberTextField("HBP", 2050, 1020, 190, 50, Color.WHITE, littleFont);
+    NumberTextField strikeoutsStat = new NumberTextField("Strikeouts", 870, 1140, 190, 50, Color.WHITE, littleFont);
+    NumberTextField stolenBasesStat = new NumberTextField("Stolen Bases", 1100, 1140, 180, 50, Color.WHITE, littleFont);
+
+    TextField inningsStat = new TextField("Innings", 720, 605, 210, 50, Color.WHITE, littleFont);
+    NumberTextField runsGivenUpStat = new NumberTextField("Runs Given Up", 960, 605, 210, 50, Color.WHITE, littleFont);
+    NumberTextField strikeoutsThrownStat = new NumberTextField("Strikeouts Thrown", 1420, 605, 190, 50, Color.WHITE, littleFont);
+    NumberTextField walksAgainstStat = new NumberTextField("Walks Against", 1640, 605, 170, 50, Color.WHITE, littleFont);
+    NumberTextField hitsAgainstStat = new NumberTextField("Hits Against", 1845, 605, 165, 50, Color.WHITE, littleFont);
+    NumberTextField teamGamesPlayedStat = new NumberTextField("Team Games Played", 750, 315, 200, 50, Color.WHITE, littleFont);
+    NumberTextField winsStat = new NumberTextField("Wins", 980, 315, 190, 50, Color.WHITE, littleFont);
+    NumberTextField lossStat = new NumberTextField("Losses", 1200, 315, 230, 50, Color.WHITE, littleFont);
+    NumberTextField runsScoredStat = new NumberTextField("Runs Scored", 1700, 315, 205, 50, Color.WHITE, littleFont);
+    NumberTextField runsScoredAgainst = new NumberTextField("Runs Against", 1935, 315, 200, 50, Color.WHITE, littleFont);
 
     public void runApplication() throws IOException {
         frame = new JFrame("Softball Tracker!");
@@ -147,7 +173,7 @@ public class Application implements ActionListener {
         windowList[3].add(new TextArea("runsgivenupLabel", "Runs Given Up", 1100, 1000, 300, 50, standardBgColor, littleFont, Color.BLACK, true));
         windowList[3].add(runsGivenUpField);
         windowList[3].add(new TextArea("strikeoutsagainstLabel", "Strikeouts", 1570, 1000, 300, 50, standardBgColor, littleFont, Color.BLACK, true));
-        windowList[3].add(strikeoutsAgainstField);
+        windowList[3].add(strikeoutsThrownField);
         windowList[3].add(new TextArea("walksagainstLabel", "Walks", 1970, 1000, 300, 50, standardBgColor, littleFont, Color.BLACK, true));
         windowList[3].add(walksAgainstField);
         windowList[3].add(new TextArea("hitsagainstLabel", "Hits", 2300, 1000, 300, 50, standardBgColor, littleFont, Color.BLACK, true));
@@ -167,6 +193,46 @@ public class Application implements ActionListener {
         windowList[5] = new Window("Stat Tracker", displayHeight, displayWidth, true);
 
         windowList[5].add(new WindowChangePicture("statBackButton", "backButton.png", 50, 50, 200, 95, standardBgColor, "Menu", this));
+
+        windowList[5].add(new Picture("teamStats", "teamStats.png", 725, 200, 1664, 182));
+        windowList[5].add(new Picture("battingStats", "battingStats.png", 840, 800, 1427, 410));
+        windowList[5].add(new Picture("pitchingStats", "pitchingStats.png", 700, 500, 1733, 170));
+        // windowList[5].add(new DropdownChooser("TeamDropDown", 100, 200, 500, 50, standardBgColor, this, littleFont, true));
+        // windowList[5].add(new DropdownChooser("PlayerDropDown", 100, 800, 500, 50, standardBgColor, this, littleFont, false));
+        windowList[5].add(gamesPlayedStat);
+        windowList[5].add(new NumberTextField("At-Bats", 1100, 910, 180, 50, Color.WHITE, littleFont));
+        windowList[5].add(plateAppearancesStat);
+        windowList[5].add(runsStat);
+        windowList[5].add(hitsStat);
+        windowList[5].add(singlesStat);
+        windowList[5].add(doublesStat);
+        windowList[5].add(triplesStat);
+        windowList[5].add(homerunsStat);
+        windowList[5].add(rbisStat);
+        windowList[5].add(walksStat);
+        windowList[5].add(hbpStat);
+        windowList[5].add(strikeoutsStat);
+        windowList[5].add(stolenBasesStat);
+        windowList[5].add(new NumberTextField("Batting AVG", 1320, 1140, 220, 50, Color.WHITE, littleFont));
+        windowList[5].add(new NumberTextField("On-Base%", 1580, 1140, 190, 50, Color.WHITE, littleFont));
+        windowList[5].add(new NumberTextField("Slugging%", 1820, 1140, 190, 50, Color.WHITE, littleFont));
+        windowList[5].add(new NumberTextField("OPS", 2050, 1140, 190, 50, Color.WHITE, littleFont));
+
+        windowList[5].add(inningsStat);
+        windowList[5].add(runsGivenUpStat);
+        windowList[5].add(new NumberTextField("ERA", 1200, 605, 190, 50, Color.WHITE, littleFont));
+        windowList[5].add(strikeoutsThrownStat);
+        windowList[5].add(walksAgainstStat);
+        windowList[5].add(hitsAgainstStat);
+        windowList[5].add(new NumberTextField("Whip", 2050, 605, 165, 50, Color.WHITE, littleFont));
+        windowList[5].add(new NumberTextField("Hitter AVG", 2250, 605, 160, 50, Color.WHITE, littleFont));
+        windowList[5].add(teamGamesPlayedStat);
+        windowList[5].add(winsStat);
+        windowList[5].add(lossStat);
+        windowList[5].add(new NumberTextField("Winning%", 1470, 315, 200, 50, Color.WHITE, littleFont));
+        windowList[5].add(runsScoredStat);
+        windowList[5].add(runsScoredAgainst);
+        windowList[5].add(new NumberTextField("Run Differential", 2170, 315, 200, 50, Color.WHITE, littleFont));
 
         // -----------------------------------------------------------------------------------------
 

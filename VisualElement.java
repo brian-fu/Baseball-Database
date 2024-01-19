@@ -172,6 +172,20 @@ class NumberTextField extends VisualElement {
     protected JFormattedTextField numberTextField;
     protected NumberFormatter numberFormatter;
 
+    // Iffy, don't really know how to do this one
+    /* 
+    public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, String display) {
+        super(id, xPosition, yPosition, width, height, bgColor);
+
+        numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance());
+        numberTextField = new JFormattedTextField(numberFormatter);
+        numberTextField.setEditable(false);
+        numberTextField.setText(display);
+        numberTextField.setFont(font);
+        this.component = numberTextField;
+        makeVisible();
+    }
+    */
     public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
@@ -191,6 +205,7 @@ class NumberTextField extends VisualElement {
         this.component = numberTextField;
         makeVisible();
     }
+
 }
 
 class TextArea extends VisualElement {
