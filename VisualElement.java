@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -162,7 +162,6 @@ class TextField extends VisualElement {
     public String getText() {
         return textField.getText();
     }
-    
 
     public void emptyText() {
         textField.setText(null);
@@ -172,7 +171,7 @@ class TextField extends VisualElement {
 class NumberTextField extends VisualElement {
     protected JFormattedTextField numberTextField;
     protected NumberFormatter numberFormatter;
-/* 
+
     public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, String display, boolean fixed) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
@@ -187,7 +186,7 @@ class NumberTextField extends VisualElement {
         this.component = numberTextField;
         makeVisible();
     }
-    */
+
     public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
@@ -208,10 +207,9 @@ class NumberTextField extends VisualElement {
         makeVisible();
     }
 
-    public String getText(){
+    public String getText() {
         return numberTextField.getText();
     }
-
 }
 
 class TextArea extends VisualElement {
@@ -248,7 +246,7 @@ class WindowChangePicture extends InteractablePicture {
 class TeamExtractPicture extends InteractablePicture {
     public TeamExtractPicture(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
         super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
-        this.type = "ExtractTextPicture";
+        this.type = "Extract Text Picture";
 
         imageButton.setActionCommand("EXTRACT TEAM NAME");
     }
@@ -260,6 +258,15 @@ class AddPlayerButton extends InteractablePicture {
         this.type = "Add Player Button";
 
         imageButton.setActionCommand("ADD PLAYER");
+    }
+}
+
+class ExitButton extends InteractablePicture {
+    public ExitButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Exit Button";
+
+        imageButton.setActionCommand("EXIT");
     }
 }
 
@@ -276,71 +283,28 @@ class InteractableObject extends VisualElement {
 }
 
 class DropdownChooser extends InteractableObject {
-
-    HashMap<Integer, Player> players = Main.getPlayers();
-    HashMap<Integer, Team> teams = Main.getTeams();
-
     protected JComboBox<String> comboBox;
     protected String[] names;
 
-    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer, Team selectedTeam) {
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, ArrayList<String> list, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor, actionListener);
         this.type = "Dropdown Chooser";
 
-        names = (isPlayer) ? new String[players.size()] : new String[teams.size()];
-        int i = 0;
-
-        if (isPlayer) {
-            for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
-                Player currentPlayer = entry.getValue();
-                names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
-                i++;
-            }
-        } else {
-            for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
-                Team currentTeam = entry.getValue();
-                names[i] = currentTeam.getTeamName();
-                i++;
-            }
+        names = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            names[i] = list.get(i);
         }
 
-        comboBox = new JComboBox<>(names);
+        comboBox = new JComboBox<String>(names);
         comboBox.setFont(font);
         comboBox.addActionListener(actionListener);
         comboBox.setActionCommand("SELECTED NAME");
-        this.component = comboBox;  // Set the component here
+        this.component = comboBox;
         makeVisible();
     }
 
     public JComboBox<String> getComboBox() {
         return comboBox;
-    }
-
-
-    public void updatePlayerItems(HashMap<Integer, Player> currentPlayers) {
-        System.out.println("updatePlayerItems called");
-        if (!currentPlayers.isEmpty()) {
-            this.comboBox.removeAllItems();
-        }
-
-        for (HashMap.Entry<Integer, Player> entry : currentPlayers.entrySet()) {
-            Player currentPlayer = entry.getValue();
-            if (currentPlayer != null) {
-                comboBox.addItem(currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
-            }
-        }
-    }
-
-    
-    public void updateTeamItems(){
-        
-        HashMap<Integer, Team> currentTeams = Main.getTeams();
-        comboBox.removeAllItems();
-
-        for (HashMap.Entry<Integer, Team> entry : currentTeams.entrySet()) {
-            Team currentTeam = entry.getValue();
-            comboBox.addItem(currentTeam.getTeamName());
-        }
     }
 }
 
@@ -382,15 +346,6 @@ class Button extends InteractableTextField {
     }
 }
 
-class ExitButton extends InteractablePicture {
-    public ExitButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
-        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
-        this.type = "Exit Button";
-
-        imageButton.setActionCommand("EXIT");
-    }
-}
-
 class WindowChangeButton extends Button {
     protected String targetWindow;
 
@@ -402,4 +357,5 @@ class WindowChangeButton extends Button {
         button.setActionCommand("CHANGE WINDOW " + targetWindow);
         makeVisible();
     }
+
 }
