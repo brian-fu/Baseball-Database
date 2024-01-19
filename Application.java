@@ -38,31 +38,31 @@ public class Application implements ActionListener {
 
     // Window 3 Components
 
-    TextField firstNameField = new TextField("firstName", 155, 530, 250, 70, Color.WHITE, littleFont);
-    TextField lastNameField = new TextField("lastName", 155, 750, 250, 70, Color.WHITE, littleFont);
-    NumberTextField jerseyNumField = new NumberTextField("jerseyNum", 110, 970, 330, 70, Color.WHITE, littleFont);
+    public static TextField firstNameField = new TextField("firstName", 155, 530, 250, 70, Color.WHITE, littleFont);
+    public static TextField lastNameField = new TextField("lastName", 155, 750, 250, 70, Color.WHITE, littleFont);
+    public static NumberTextField jerseyNumField = new NumberTextField("jerseyNum", 110, 970, 330, 70, Color.WHITE, littleFont);
 
-    NumberTextField gamesPlayedField = new NumberTextField("gamesPlayed", 690, 180, 300, 70, Color.WHITE, littleFont);
-    NumberTextField plateAppsField = new NumberTextField("plateApps", 1140, 180, 250, 70, Color.WHITE, littleFont);
-    NumberTextField runsField = new NumberTextField("runs", 1510, 180, 200, 70, Color.WHITE, littleFont);
-    NumberTextField hitsField = new NumberTextField("hits", 1860, 180, 200, 70, Color.WHITE, littleFont);
-    NumberTextField singlesField = new NumberTextField("singles", 2180, 180, 240, 70, Color.WHITE, littleFont);
+    public static NumberTextField gamesPlayedField = new NumberTextField("gamesPlayed", 690, 180, 300, 70, Color.WHITE, littleFont);
+    public static NumberTextField plateAppsField = new NumberTextField("plateApps", 1140, 180, 250, 70, Color.WHITE, littleFont);
+    public static NumberTextField runsField = new NumberTextField("runs", 1510, 180, 200, 70, Color.WHITE, littleFont);
+    public static NumberTextField hitsField = new NumberTextField("hits", 1860, 180, 200, 70, Color.WHITE, littleFont);
+    public static NumberTextField singlesField = new NumberTextField("singles", 2180, 180, 240, 70, Color.WHITE, littleFont);
 
-    NumberTextField doublesField = new NumberTextField("doubles", 785, 460, 260, 70, Color.WHITE, littleFont);
-    NumberTextField triplesField = new NumberTextField("triples", 1195, 460, 260, 70, Color.WHITE, littleFont);
-    NumberTextField homerunsField = new NumberTextField("homeruns", 1610, 460, 280, 70, Color.WHITE, littleFont);
-    NumberTextField rbisField = new NumberTextField("rbis", 2025, 460, 200, 70, Color.WHITE, littleFont);
+    public static NumberTextField doublesField = new NumberTextField("doubles", 785, 460, 260, 70, Color.WHITE, littleFont);
+    public static NumberTextField triplesField = new NumberTextField("triples", 1195, 460, 260, 70, Color.WHITE, littleFont);
+    public static NumberTextField homerunsField = new NumberTextField("homeruns", 1610, 460, 280, 70, Color.WHITE, littleFont);
+    public static NumberTextField rbisField = new NumberTextField("rbis", 2025, 460, 200, 70, Color.WHITE, littleFont);
 
-    NumberTextField walksField = new NumberTextField("walks", 785, 740, 260, 70, Color.WHITE, littleFont);
-    NumberTextField hbpsField = new NumberTextField("hbps", 1195, 740, 220, 70, Color.WHITE, littleFont);
-    NumberTextField strikeoutsField = new NumberTextField("strikeouts", 1535, 740, 280, 70, Color.WHITE, littleFont);
-    NumberTextField stolenBasesField = new NumberTextField("stolenBases", 1970, 740, 310, 70, Color.WHITE, littleFont);
+    public static NumberTextField walksField = new NumberTextField("walks", 785, 740, 260, 70, Color.WHITE, littleFont);
+    public static NumberTextField hbpsField = new NumberTextField("hbps", 1195, 740, 220, 70, Color.WHITE, littleFont);
+    public static NumberTextField strikeoutsField = new NumberTextField("strikeouts", 1535, 740, 280, 70, Color.WHITE, littleFont);
+    public static  NumberTextField stolenBasesField = new NumberTextField("stolenBases", 1970, 740, 310, 70, Color.WHITE, littleFont);
 
-    TextField inningsField = new TextField("innings", 690, 1060, 250, 70, Color.WHITE, littleFont);
-    NumberTextField runsGivenUpField = new NumberTextField("runsgivenup", 1070, 1060, 330, 70, Color.WHITE, littleFont);
-    NumberTextField strikeoutsAgainstField = new NumberTextField("strikeoutsAgainst", 1520, 1060, 290, 70, Color.WHITE, littleFont);
-    NumberTextField walksAgainstField = new NumberTextField("walksAgainst", 1920, 1060, 235, 70, Color.WHITE, littleFont);
-    NumberTextField hitsAgainstField = new NumberTextField("hitsAgainst", 2240, 1060, 200, 70, Color.WHITE, littleFont);
+    public static TextField inningsField = new TextField("innings", 690, 1060, 250, 70, Color.WHITE, littleFont);
+    public static NumberTextField runsGivenUpField = new NumberTextField("runsgivenup", 1070, 1060, 330, 70, Color.WHITE, littleFont);
+    public static NumberTextField strikeoutsAgainstField = new NumberTextField("strikeoutsAgainst", 1520, 1060, 290, 70, Color.WHITE, littleFont);
+    public static NumberTextField walksAgainstField = new NumberTextField("walksAgainst", 1920, 1060, 235, 70, Color.WHITE, littleFont);
+    public static NumberTextField hitsAgainstField = new NumberTextField("hitsAgainst", 2240, 1060, 200, 70, Color.WHITE, littleFont);
 
 
     public void runApplication() throws IOException {
