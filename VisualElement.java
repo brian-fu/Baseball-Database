@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -171,12 +170,13 @@ class TextField extends VisualElement {
 
 class NumberTextField extends VisualElement {
     protected JFormattedTextField numberTextField;
+    protected NumberFormatter numberFormatter;
 
     public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
 
-        NumberFormatter numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance()) {
+        numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance()) {
             @Override
             public Object stringToValue(String text) throws ParseException {
                 if (text.length() == 0) {
@@ -227,9 +227,18 @@ class WindowChangePicture extends InteractablePicture {
 class TeamExtractPicture extends InteractablePicture {
     public TeamExtractPicture(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
         super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
-        this.type = "ExtractTextPicture";
+        this.type = "Extract Text Picture";
 
         imageButton.setActionCommand("EXTRACT TEAM NAME");
+    }
+}
+
+class AddPlayerButton extends InteractablePicture {
+    public AddPlayerButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Add Player Button";
+
+        imageButton.setActionCommand("ADD PLAYER");
     }
 }
 
@@ -246,33 +255,16 @@ class InteractableObject extends VisualElement {
 }
 
 class DropdownChooser extends InteractableObject {
-
-    HashMap<Integer, Player> players = Main.getPlayers();
-    HashMap<Integer, Team> teams = Main.getTeams();
-
     protected JComboBox<String> comboBox;
     protected String[] names;
 
-    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer) {
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, ArrayList<String> list, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor, actionListener);
         this.type = "Dropdown Chooser";
 
-        if(isPlayer){
-            names = new String[players.size()];
-            int i = 0;
-            for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
-                Player currentPlayer = entry.getValue();
-                names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
-                i++;
-            }
-        } else{
-            names = new String[teams.size()];
-            int i = 0;
-            for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
-                Team currentTeam = entry.getValue();
-                names[i] = currentTeam.getTeamName();
-                i++;
-            }
+        names = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            names[i] = list.get(i);
         }
 
         comboBox = new JComboBox<String>(names);
@@ -282,7 +274,6 @@ class DropdownChooser extends InteractableObject {
         this.component = comboBox;
         makeVisible();
     }
-
 
     public JComboBox<String> getComboBox() {
         return comboBox;
