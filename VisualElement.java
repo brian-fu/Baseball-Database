@@ -6,9 +6,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 public class VisualElement {
 
@@ -164,6 +169,30 @@ class TextField extends VisualElement {
     }
 }
 
+class NumberTextField extends VisualElement {
+    protected JFormattedTextField numberTextField;
+
+    public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
+        super(id, xPosition, yPosition, width, height, bgColor);
+        this.type = "Number Text Field";
+
+        NumberFormatter numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance()) {
+            @Override
+            public Object stringToValue(String text) throws ParseException {
+                if (text.length() == 0) {
+                    return null;
+                }
+                return super.stringToValue(text);
+            }
+        };
+        numberFormatter.setAllowsInvalid(false);
+        numberTextField = new JFormattedTextField(numberFormatter);
+        numberTextField.setFont(font);
+        this.component = numberTextField;
+        makeVisible();
+    }
+}
+
 class TextArea extends VisualElement {
     protected JTextArea textArea;
 
@@ -214,6 +243,50 @@ class InteractableObject extends VisualElement {
         this.actionListener = actionListener;
     }
 
+}
+
+class DropdownChooser extends InteractableObject {
+
+    HashMap<Integer, Player> players = Main.getPlayers();
+    HashMap<Integer, Team> teams = Main.getTeams();
+
+    protected JComboBox<String> comboBox;
+    protected String[] names;
+
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer) {
+        super(id, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Dropdown Chooser";
+
+        if(isPlayer){
+            names = new String[players.size()];
+            int i = 0;
+            for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
+                Player currentPlayer = entry.getValue();
+                names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
+                i++;
+            }
+        } else{
+            names = new String[teams.size()];
+            int i = 0;
+            for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
+                Team currentTeam = entry.getValue();
+                names[i] = currentTeam.getTeamName();
+                i++;
+            }
+        }
+
+        comboBox = new JComboBox<String>(names);
+        comboBox.setFont(font);
+        comboBox.addActionListener(actionListener);
+        comboBox.setActionCommand("SELECTED NAME");
+        this.component = comboBox;
+        makeVisible();
+    }
+
+
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
 }
 
 class InteractableTextField extends InteractableObject {
