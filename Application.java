@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -133,6 +134,10 @@ public class Application implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        //HashMap<Integer, Player> players = Main.getPlayers();
+        HashMap<Integer, Team> teams = Main.getTeams();
+
         String command = e.getActionCommand();
         if (command.contains("CHANGE WINDOW ")) {
             command = command.replace("CHANGE WINDOW ", "");
@@ -142,14 +147,19 @@ public class Application implements ActionListener {
         else if (command.contains("EXTRACT TEAM NAME")) {
             String newTeamName = teamName.getText().trim();
             if (!newTeamName.equals("")) {
-                for (int i = 0; i < teamList.size(); i++) {
-                    if (teamList.get(i).equals(newTeamName)) {
+                for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
+                    Team team = entry.getValue();
+                    if(newTeamName.toLowerCase().equals(team.getTeamName().toLowerCase())){
                         makeTimedVisible(repeatTeamAlert);
                         return;
                     }
                 }
-                teamList.add(newTeamName);
+
+                Main.createTeam(newTeamName);
                 teamName.emptyText();
+                FileWriterTeam.writer("teams.csv");
+                FileWriterPlayer.writer("players.csv");
+                
             }
         }
     }
