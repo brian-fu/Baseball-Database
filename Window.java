@@ -26,9 +26,11 @@ public class Window {
 
     }
 
-    public void add(VisualElement element) {
-        window.add(element.getComponent());
-        window.setVisible(true);
+    public void add(VisualElement visualElement) {
+        // Check if visualElement and its component are not null before adding it to the panel
+        if (visualElement != null && visualElement.getComponent() != null) {
+            window.add(visualElement.getComponent());
+        }
     }
 
     public String getID() {
