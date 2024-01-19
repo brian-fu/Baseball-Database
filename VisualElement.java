@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -233,6 +232,15 @@ class TeamExtractPicture extends InteractablePicture {
     }
 }
 
+class AddPlayerButton extends InteractablePicture {
+    public AddPlayerButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Add Player Button";
+
+        imageButton.setActionCommand("ADD PLAYER");
+    }
+}
+
 class InteractableObject extends VisualElement {
 
     protected ActionListener actionListener;
@@ -253,21 +261,20 @@ class DropdownChooser extends InteractableObject {
     protected JComboBox<String> comboBox;
     protected String[] names;
 
-    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer) {
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer, Team selectedTeam) {
         super(id, xPosition, yPosition, width, height, bgColor, actionListener);
         this.type = "Dropdown Chooser";
 
-        if(isPlayer){
-            names = new String[players.size()];
-            int i = 0;
+        names = (isPlayer) ? new String[players.size()] : new String[teams.size()];
+        int i = 0;
+
+        if (isPlayer) {
             for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
                 Player currentPlayer = entry.getValue();
                 names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
                 i++;
             }
-        } else{
-            names = new String[teams.size()];
-            int i = 0;
+        } else {
             for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
                 Team currentTeam = entry.getValue();
                 names[i] = currentTeam.getTeamName();
@@ -275,17 +282,36 @@ class DropdownChooser extends InteractableObject {
             }
         }
 
-        comboBox = new JComboBox<String>(names);
+        comboBox = new JComboBox<>(names);
         comboBox.setFont(font);
         comboBox.addActionListener(actionListener);
         comboBox.setActionCommand("SELECTED NAME");
-        this.component = comboBox;
+        this.component = comboBox;  // Set the component here
         makeVisible();
     }
 
-
     public JComboBox<String> getComboBox() {
         return comboBox;
+    }
+
+    public void updatePlayerItems(HashMap<Integer, Player> currentPlayers) {
+        comboBox.removeAllItems();
+
+        for (HashMap.Entry<Integer, Player> entry : currentPlayers.entrySet()) {
+            Player currentPlayer = entry.getValue();
+            comboBox.addItem(currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
+        }
+    }
+
+    public void updateTeamItems(){
+        
+        HashMap<Integer, Team> currentTeams = Main.getTeams();
+        comboBox.removeAllItems();
+
+        for (HashMap.Entry<Integer, Team> entry : currentTeams.entrySet()) {
+            Team currentTeam = entry.getValue();
+            comboBox.addItem(currentTeam.getTeamName());
+        }
     }
 }
 
@@ -338,5 +364,4 @@ class WindowChangeButton extends Button {
         button.setActionCommand("CHANGE WINDOW " + targetWindow);
         makeVisible();
     }
-
 }
