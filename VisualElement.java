@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -245,16 +246,33 @@ class InteractableObject extends VisualElement {
 }
 
 class DropdownChooser extends InteractableObject {
+
+    HashMap<Integer, Player> players = Main.getPlayers();
+    HashMap<Integer, Team> teams = Main.getTeams();
+
     protected JComboBox<String> comboBox;
     protected String[] names;
 
-    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, ArrayList<String> list, Font font) {
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer) {
         super(id, xPosition, yPosition, width, height, bgColor, actionListener);
         this.type = "Dropdown Chooser";
 
-        names = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            names[i] = list.get(i);
+        if(isPlayer){
+            names = new String[players.size()];
+            int i = 0;
+            for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
+                Player currentPlayer = entry.getValue();
+                names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
+                i++;
+            }
+        } else{
+            names = new String[teams.size()];
+            int i = 0;
+            for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
+                Team currentTeam = entry.getValue();
+                names[i] = currentTeam.getTeamName();
+                i++;
+            }
         }
 
         comboBox = new JComboBox<String>(names);
@@ -264,6 +282,7 @@ class DropdownChooser extends InteractableObject {
         this.component = comboBox;
         makeVisible();
     }
+
 
     public JComboBox<String> getComboBox() {
         return comboBox;

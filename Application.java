@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.HashMap;
 
 public class Application implements ActionListener {
 
     public static final int windowCount = 6;
+
 
     public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static JFrame frame;
@@ -36,6 +38,7 @@ public class Application implements ActionListener {
     public static String currentTeam;
 
     public void runApplication() throws IOException {
+
         frame = new JFrame("Softball Tracker!");
         initializeFrame(frame);
 
@@ -96,8 +99,8 @@ public class Application implements ActionListener {
         windowList[5].add(new Picture("teamStats", "teamStats.png", 725, 200, 1664, 182));
         windowList[5].add(new Picture("battingStats", "battingStats.png", 840, 800, 1427, 410));
         windowList[5].add(new Picture("pitchingStats", "pitchingStats.png", 700, 500, 1733, 170));
-        windowList[5].add(new DropdownChooser("TeamDropDown", 100, 200, 500, 50, standardBgColor, null, teamNames, titleFont));
-        windowList[5].add(new DropdownChooser("PlayerDropDown", 100, 800, 500, 50, standardBgColor, null, playerNames, titleFont));
+        windowList[5].add(new DropdownChooser("TeamDropDown", 100, 200, 500, 50, standardBgColor, null, littleFont, true));
+        windowList[5].add(new DropdownChooser("PlayerDropDown", 100, 800, 500, 50, standardBgColor, null, littleFont, false));
 
         // -----------------------------------------------------------------------------------------
 
@@ -130,7 +133,7 @@ public class Application implements ActionListener {
             }
         }
 
-        teamNamesChooser = new DropdownChooser("teamNameChooser", 50, 300, 500, 100, Color.WHITE, this, teamList, bigFont);
+        teamNamesChooser = new DropdownChooser("teamNameChooser", 50, 300, 500, 100, Color.WHITE, this, bigFont, false);
         windowList[3].add(teamNamesChooser);
         frame.setVisible(true);
     }
