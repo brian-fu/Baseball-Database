@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -162,6 +162,7 @@ class TextField extends VisualElement {
     public String getText() {
         return textField.getText();
     }
+    
 
     public void emptyText() {
         textField.setText(null);
@@ -171,15 +172,17 @@ class TextField extends VisualElement {
 class NumberTextField extends VisualElement {
     protected JFormattedTextField numberTextField;
     protected NumberFormatter numberFormatter;
+    protected double data;
 
-    public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, String display, boolean fixed) {
+    public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, boolean fixed) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
+        this.data = 0.0;
 
         numberFormatter = new NumberFormatter(NumberFormat.getInstance());
         numberTextField = new JFormattedTextField(numberFormatter);
         numberTextField.setFont(font);
-        numberTextField.setValue(new Double(display));
+        numberTextField.setValue(data);
         if (fixed) {
             numberTextField.setEditable(false);
         }
@@ -207,9 +210,44 @@ class NumberTextField extends VisualElement {
         makeVisible();
     }
 
-    public String getText() {
+    public String getText(){
         return numberTextField.getText();
     }
+
+    public void updatePlayerStats(HashMap<Integer, Player> currentPlayers, double var) {
+        System.out.println("updatePlayerStats called");
+        if (!currentPlayers.isEmpty()) {
+            this.numberTextField.setValue(null);
+        }
+
+        for (HashMap.Entry<Integer, Player> entry : currentPlayers.entrySet()) {
+            Player currentPlayer = entry.getValue();
+            if (currentPlayer != null) {
+                this.data = var;
+                this.numberTextField.setValue(data);
+                this.component = numberTextField;
+                makeVisible();
+            }
+        }
+    }
+
+    public void updateTeamStats(HashMap<Integer, Team> currentTeams, double var){
+        System.out.println("updateTeamStats called");
+        if (!currentTeams.isEmpty()) {
+            this.numberTextField.setValue(null);
+        }
+
+        for (HashMap.Entry<Integer, Team> entry : currentTeams.entrySet()) {
+            Team currentTeam = entry.getValue();
+            if (currentTeam != null) {
+                this.data = var;
+                this.numberTextField.setValue(data);
+                this.component = numberTextField;
+                makeVisible();
+            }
+        }
+    }
+
 }
 
 class TextArea extends VisualElement {
@@ -246,7 +284,7 @@ class WindowChangePicture extends InteractablePicture {
 class TeamExtractPicture extends InteractablePicture {
     public TeamExtractPicture(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
         super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
-        this.type = "Extract Text Picture";
+        this.type = "ExtractTextPicture";
 
         imageButton.setActionCommand("EXTRACT TEAM NAME");
     }
@@ -258,15 +296,6 @@ class AddPlayerButton extends InteractablePicture {
         this.type = "Add Player Button";
 
         imageButton.setActionCommand("ADD PLAYER");
-    }
-}
-
-class ExitButton extends InteractablePicture {
-    public ExitButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
-        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
-        this.type = "Exit Button";
-
-        imageButton.setActionCommand("EXIT");
     }
 }
 
@@ -283,28 +312,71 @@ class InteractableObject extends VisualElement {
 }
 
 class DropdownChooser extends InteractableObject {
+
+    HashMap<Integer, Player> players = Main.getPlayers();
+    HashMap<Integer, Team> teams = Main.getTeams();
+
     protected JComboBox<String> comboBox;
     protected String[] names;
 
-    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, ArrayList<String> list, Font font) {
+    public DropdownChooser(String id, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener, Font font, boolean isPlayer, Team selectedTeam) {
         super(id, xPosition, yPosition, width, height, bgColor, actionListener);
         this.type = "Dropdown Chooser";
 
-        names = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            names[i] = list.get(i);
+        names = (isPlayer) ? new String[players.size()] : new String[teams.size()];
+        int i = 0;
+
+        if (isPlayer) {
+            for (HashMap.Entry<Integer, Player> entry : players.entrySet()) {
+                Player currentPlayer = entry.getValue();
+                names[i] = currentPlayer.getFirstName() + " " + currentPlayer.getLastName();
+                i++;
+            }
+        } else {
+            for (HashMap.Entry<Integer, Team> entry : teams.entrySet()) {
+                Team currentTeam = entry.getValue();
+                names[i] = currentTeam.getTeamName();
+                i++;
+            }
         }
 
-        comboBox = new JComboBox<String>(names);
+        comboBox = new JComboBox<>(names);
         comboBox.setFont(font);
         comboBox.addActionListener(actionListener);
         comboBox.setActionCommand("SELECTED NAME");
-        this.component = comboBox;
+        this.component = comboBox;  // Set the component here
         makeVisible();
     }
 
     public JComboBox<String> getComboBox() {
         return comboBox;
+    }
+
+
+    public void updatePlayerItems(HashMap<Integer, Player> currentPlayers) {
+        System.out.println("updatePlayerItems called");
+        if (!currentPlayers.isEmpty()) {
+            this.comboBox.removeAllItems();
+        }
+
+        for (HashMap.Entry<Integer, Player> entry : currentPlayers.entrySet()) {
+            Player currentPlayer = entry.getValue();
+            if (currentPlayer != null) {
+                comboBox.addItem(currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
+            }
+        }
+    }
+
+    
+    public void updateTeamItems(){
+        
+        HashMap<Integer, Team> currentTeams = Main.getTeams();
+        comboBox.removeAllItems();
+
+        for (HashMap.Entry<Integer, Team> entry : currentTeams.entrySet()) {
+            Team currentTeam = entry.getValue();
+            comboBox.addItem(currentTeam.getTeamName());
+        }
     }
 }
 
@@ -346,6 +418,15 @@ class Button extends InteractableTextField {
     }
 }
 
+class ExitButton extends InteractablePicture {
+    public ExitButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Exit Button";
+
+        imageButton.setActionCommand("EXIT");
+    }
+}
+
 class WindowChangeButton extends Button {
     protected String targetWindow;
 
@@ -357,5 +438,4 @@ class WindowChangeButton extends Button {
         button.setActionCommand("CHANGE WINDOW " + targetWindow);
         makeVisible();
     }
-
 }

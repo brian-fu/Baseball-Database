@@ -48,12 +48,11 @@ public class Main {
         return newTeamID;
     }
 
-    public static Team createTeam(String teamName){
+    public static void createTeam(String teamName){
         HashMap<Integer, Player> teamRoster = new HashMap<>();
         int newTeamID = generateTeamID();
         Team newTeam = new Team(teamRoster, teamName, newTeamID, 0, 0, 0, 0, 0, 0, 0.0);
         league.put(newTeamID, newTeam);
-        return newTeam;
     }
     
 
