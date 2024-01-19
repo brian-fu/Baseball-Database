@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Application implements ActionListener {
 
@@ -22,7 +24,9 @@ public class Application implements ActionListener {
     public static Font titleFont = new Font("Osaka", Font.BOLD, 50);
     public static Font subtitleFont = new Font("Osaka", Font.BOLD, 30);
 
+    // Public componenets
     public static TextField teamName = new TextField("teamNameField", 1130, 600, 300, 80, Color.WHITE, subtitleFont);
+    public static TextArea repeatTeamAlert = new TextArea("repeatTeamAlert", "Team name is already used in this league!", 980,800, 700, 200, standardBgColor, subtitleFont, Color.BLACK, false);
 
     public static ArrayList<String> teamList = new ArrayList<String>();
 
@@ -53,10 +57,9 @@ public class Application implements ActionListener {
 
         windowList[2].add(new WindowChangePicture("teamCreatorBackButton", "backButton.png", 50, 50, 200, 95, standardBgColor, "Menu", this));
         windowList[2].add(teamName);
-        windowList[2].add(new TextArea("teamNameLabel", "TEAM NAME", 1130,500, 500, 200, standardBgColor, titleFont, Color.BLACK));
+        windowList[2].add(new TextArea("teamNameLabel", "TEAM NAME", 1130,500, 500, 200, standardBgColor, titleFont, Color.BLACK, true));
         windowList[2].add(new TeamExtractPicture("createTeamButton", "createTeamActionButton.png", 1168, 700, 224, 74, standardBgColor, this));
-
-
+        windowList[2].add(repeatTeamAlert);
         
         // -----------------------------------------------------------------------------------------
 
@@ -75,9 +78,7 @@ public class Application implements ActionListener {
         windowList[5] = new Window("Stat Tracker", displayHeight, displayWidth);
 
         windowList[5].add(new WindowChangePicture("statBackButton", "backButton.png", 50, 50, 200, 95, standardBgColor, "Menu", this));
-        windowList[5].add(new Picture("teamStats", "teamStats.png", 725, 200, 1664, 182));
-        windowList[5].add(new Picture("battingStats", "battingStats.png", 840, 800, 1427, 410));
-        windowList[5].add(new Picture("pitchingStats", "pitchingStats.png", 700, 500, 1733, 170));
+
         // -----------------------------------------------------------------------------------------
 
         changeWindow("Start Screen");
@@ -115,9 +116,19 @@ public class Application implements ActionListener {
         currentWindow = bufferWindow;
     }
 
+
     public void makeTimedVisible(VisualElement element) {
         element.makeVisible();
-        Timer timer = new Timer(2500, this);
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                element.makeInvisible();
+            }
+        };
+
+        timer.schedule(task, 2000);
     }
 
     @Override
@@ -129,15 +140,17 @@ public class Application implements ActionListener {
         }
 
         else if (command.contains("EXTRACT TEAM NAME")) {
-            String newTeamName = teamName.getText();
-            for (int i = 0; i < teamList.size(); i++) {
-                if (teamList.get(i) == newTeamName) {
-                    // Create some kind of indicator (I will do it)
-                    return;
+            String newTeamName = teamName.getText().trim();
+            if (!newTeamName.equals("")) {
+                for (int i = 0; i < teamList.size(); i++) {
+                    if (teamList.get(i).equals(newTeamName)) {
+                        makeTimedVisible(repeatTeamAlert);
+                        return;
+                    }
                 }
+                teamList.add(newTeamName);
+                teamName.emptyText();
             }
-            teamList.add(newTeamName);
-            teamName.emptyText();
         }
     }
 }

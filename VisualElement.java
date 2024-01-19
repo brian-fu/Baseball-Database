@@ -167,7 +167,7 @@ class TextField extends VisualElement {
 class TextArea extends VisualElement {
     protected JTextArea textArea;
 
-    public TextArea(String id, String text, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, Color textColor) {
+    public TextArea(String id, String text, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, Color textColor, boolean visible) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Text Area";
 
@@ -177,16 +177,9 @@ class TextArea extends VisualElement {
         textArea.setEditable(false);
 
         this.component = textArea;
-        makeVisible();
-    }
-}
-
-class TextAreaTimed extends TextArea {
-
-    public TextAreaTimed(String id, String text, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, Color textColor, boolean visible) {
-        super(id, text, xPosition, yPosition, width, height, bgColor, font, textColor);
-
-        this.textArea.setVisible(visible);
+        if (visible == true) {
+            makeVisible();
+        }
     }
 }
 
