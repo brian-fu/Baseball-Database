@@ -101,6 +101,40 @@ public class Application implements ActionListener {
         windowList[5].add(new Picture("pitchingStats", "pitchingStats.png", 700, 500, 1733, 170));
         windowList[5].add(new DropdownChooser("TeamDropDown", 100, 200, 500, 50, standardBgColor, null, littleFont, true));
         windowList[5].add(new DropdownChooser("PlayerDropDown", 100, 800, 500, 50, standardBgColor, null, littleFont, false));
+        windowList[5].add(new NumberTextField("Player GamesPlayed", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("At-Bats", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Plate Apperances", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Runs", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Hits", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Singles", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Doubles", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Triples", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Homeruns", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("RBIs", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Walks", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("HBP", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Strikeouts", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Stolen Bases", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Batting AVG", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("On-Base%", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Slugging%", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("OPS", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Innings", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Runs Given Up", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("ERA", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Strickouts", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Walks", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Hits", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Whip", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Hitter AVG", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Team Games Played", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Wins", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Losses", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Winning%", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Runs Scored", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Runs Against", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        windowList[5].add(new NumberTextField("Run Differential", displayHeight, windowCount, displayWidth, displayHeight, standardBgColor, bigFont));
+        
 
         // -----------------------------------------------------------------------------------------
 
