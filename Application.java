@@ -56,7 +56,7 @@ public class Application implements ActionListener {
     public static NumberTextField walksField = new NumberTextField("walks", 785, 740, 260, 70, Color.WHITE, littleFont);
     public static NumberTextField hbpsField = new NumberTextField("hbps", 1195, 740, 220, 70, Color.WHITE, littleFont);
     public static NumberTextField strikeoutsField = new NumberTextField("strikeouts", 1535, 740, 280, 70, Color.WHITE, littleFont);
-    public static  NumberTextField stolenBasesField = new NumberTextField("stolenBases", 1970, 740, 310, 70, Color.WHITE, littleFont);
+    public static NumberTextField stolenBasesField = new NumberTextField("stolenBases", 1970, 740, 310, 70, Color.WHITE, littleFont);
 
     public static TextField inningsField = new TextField("innings", 690, 1060, 250, 70, Color.WHITE, littleFont);
     public static NumberTextField runsGivenUpField = new NumberTextField("runsgivenup", 1070, 1060, 330, 70, Color.WHITE, littleFont);
@@ -83,7 +83,7 @@ public class Application implements ActionListener {
 
         windowList[1].add(new WindowChangePicture("teamCreatorButton", "createTeamButton.png", 1138, 300, 284, 70, standardBgColor, "Team Creator", this));
         windowList[1].add(new WindowChangePicture("teamEditorButton", "editTeamButton.png", 1138, 500, 284, 70, standardBgColor, "Team Editor", this));
-        windowList[1].add(new WindowChangePicture("statEditorButton", "statEditorButton.png", 1138, 700, 284, 70, standardBgColor, "Stat Editor", this));
+        windowList[1].add(new WindowChangePicture("statManualButton", "statManualButton.png", 1138, 700, 284, 70, standardBgColor, "Stat Manual", this));
         windowList[1].add(new WindowChangePicture("statTrackerButton", "statTrackerButton.png", 1138, 900, 284, 70, standardBgColor, "Stat Tracker", this));
 
         // -----------------------------------------------------------------------------------------
@@ -157,9 +157,10 @@ public class Application implements ActionListener {
 
         // -----------------------------------------------------------------------------------------
 
-        windowList[4] = new Window("Stat Editor", displayHeight, displayWidth, true);
+        windowList[4] = new Window("Stat Manual", displayHeight, displayWidth, true);
 
         windowList[4].add(new WindowChangePicture("gameBackButton", "backButton.png", 50, 50, 200, 95, standardBgColor, "Menu", this));
+        windowList[4].add(new Picture("statManual", "statInstructions.png", 700, 500, 1073, 254));
 
         // -----------------------------------------------------------------------------------------
 
@@ -169,7 +170,7 @@ public class Application implements ActionListener {
 
         // -----------------------------------------------------------------------------------------
 
-        changeWindow("Team Editor");
+        changeWindow("Start Screen");
         frame.setVisible(true);
     }
 
