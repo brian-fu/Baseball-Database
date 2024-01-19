@@ -75,7 +75,9 @@ public class Application implements ActionListener {
         windowList[5] = new Window("Stat Tracker", displayHeight, displayWidth);
 
         windowList[5].add(new WindowChangePicture("statBackButton", "backButton.png", 50, 50, 200, 95, standardBgColor, "Menu", this));
-
+        windowList[5].add(new Picture("teamStats", "teamStats.png", 725, 200, 1664, 182));
+        windowList[5].add(new Picture("battingStats", "battingStats.png", 840, 800, 1427, 410));
+        windowList[5].add(new Picture("pitchingStats", "pitchingStats.png", 700, 500, 1733, 170));
         // -----------------------------------------------------------------------------------------
 
         changeWindow("Start Screen");
