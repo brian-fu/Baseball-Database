@@ -16,7 +16,7 @@ public class Player{
     private int doubles;
     private int triples;
     private int homeRuns;
-    private int rbi;
+    private int rbis;
     private int walks;
     private int hitByPitch;
     private int strikeouts;
@@ -52,11 +52,9 @@ public class Player{
     }
     
     public Player(String firstName, String lastName, int playerID, int teamNumber, int jerseyNumber, int gamesPlayed,
-        int plateAppearances, int runs, int hits, int singles, int doubles, int triples, int homeRuns, int rbi,
-        int walks, int hitByPitch, int strikeouts, int stolenBases, int atBats, int runsGivenUp,
-        int strikeoutsPitched, int walksAllowed, int hitsAllowed, double inningsPitched, double walksHitsPerInning,
-        double hitterAverageAgainst, double earnedRunAverage, double battingAverage, double onBasePercentage,
-        double sluggingPercentage, double onBasePlusSlugging) {
+        int plateAppearances, int runs, int hits, int singles, int doubles, int triples, int homeRuns, int rbis,
+        int walks, int hitByPitch, int strikeouts, int stolenBases, int runsGivenUp,
+        int strikeoutsPitched, int walksAllowed, int hitsAllowed, double inningsPitched) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,24 +69,24 @@ public class Player{
         this.doubles = doubles;
         this.triples = triples;
         this.homeRuns = homeRuns;
-        this.rbi = rbi;
+        this.rbis = rbis;
         this.walks = walks;
         this.hitByPitch = hitByPitch;
         this.strikeouts = strikeouts;
         this.stolenBases = stolenBases;
-        this.atBats = atBats;
+        this.atBats = getAtBats();
         this.runsGivenUp = runsGivenUp;
         this.strikeoutsPitched = strikeoutsPitched;
         this.walksAllowed = walksAllowed;
         this.hitsAllowed = hitsAllowed;
         this.inningsPitched = inningsPitched;
-        this.walksHitsPerInning = walksHitsPerInning;
-        this.hitterAverageAgainst = hitterAverageAgainst;
-        this.earnedRunAverage = earnedRunAverage;
-        this.battingAverage = battingAverage;
-        this.onBasePercentage = onBasePercentage;
-        this.sluggingPercentage = sluggingPercentage;
-        this.onBasePlusSlugging = onBasePlusSlugging;
+        this.walksHitsPerInning = getWalksHitsPerInning();
+        this.hitterAverageAgainst = getHitterAverageAgainst();
+        this.earnedRunAverage = getEarnedRunAverage();
+        this.battingAverage = getBattingAverage();
+        this.onBasePercentage = getOnBasePercentage();
+        this.sluggingPercentage = getSluggingPercentage();
+        this.onBasePlusSlugging = getOnBasePlusSlugging();
 
     }
 
@@ -187,11 +185,11 @@ public class Player{
     }
 
     public int getRbis() {
-        return rbi;
+        return rbis;
     }
 
     public void setRbis(int rbi) {
-        this.rbi += rbi;
+        this.rbis += rbi;
     }
 
     public int getWalks() {
@@ -345,7 +343,7 @@ public class Player{
             ", doubles=" + doubles +
             ", triples=" + triples +
             ", homeRuns=" + homeRuns +
-            ", rbi=" + rbi +
+            ", rbi=" + rbis +
             ", walks=" + walks +
             ", hitByPitch=" + hitByPitch +
             ", strikeouts=" + strikeouts +

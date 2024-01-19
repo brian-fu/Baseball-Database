@@ -36,7 +36,6 @@ public class FileReaderPlayer {
                 int hitByPitch = Integer.parseInt(values[15]);
                 int strikeouts = Integer.parseInt(values[16]);
                 int stolenBases = Integer.parseInt(values[17]);
-                int atBats = Integer.parseInt(values[18]);
 
                 // PITCHING STATS
                 int runsGivenUp = Integer.parseInt(values[19]);
@@ -45,24 +44,13 @@ public class FileReaderPlayer {
                 int hitsAllowed = Integer.parseInt(values[22]);
                 double inningsPitched = Double.parseDouble(values[23]);
 
-                // CALCULATED PITCHING STATS
-                double walksHitsPerInning = Double.parseDouble(values[24]);
-                double hitterAverageAgainst = Double.parseDouble(values[25]);
-                double earnedRunAverage = Double.parseDouble(values[26]);
-
-                // CALCULATED BATTING STATS
-                double battingAverage = Double.parseDouble(values[27]);
-                double onBasePercentage = Double.parseDouble(values[28]);
-                double sluggingPercentage = Double.parseDouble(values[29]);
-                double onBasePlusSlugging = Double.parseDouble(values[30]);
 
                 // Creates New Object to be added to Hashmap
                 Player player = new Player(firstName, lastName, playerID, teamID, jerseyNumber,
                     gamesPlayed, plateAppearances, runs, hits, singles, doubles, triples, homeRuns,
-                    rbi, walks, hitByPitch, strikeouts, stolenBases, atBats,
-                    runsGivenUp, strikeoutsPitched, walksAllowed, hitsAllowed, inningsPitched,
-                    walksHitsPerInning, hitterAverageAgainst, earnedRunAverage,
-                    battingAverage, onBasePercentage, sluggingPercentage, onBasePlusSlugging);
+                    rbi, walks, hitByPitch, strikeouts, stolenBases,
+                    runsGivenUp, strikeoutsPitched, walksAllowed, hitsAllowed, inningsPitched
+                    );
 
                 players.put(playerID, player);
             }

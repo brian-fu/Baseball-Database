@@ -1,3 +1,2 @@
-F_NAME,L_NAME,ID,teamID,NUMBER,GP,PA,R,H,1B,2B,3B,HR,RBI,BB,HBP,SO,SB,AB,R_GivenUp,SO_Pitched,BB_Allowed,H_Allowed,IP,WHIP,H_Avg_Against,ERA,AVG,OBP,SLG,OPS
-Christopher,Min,1,1,15,0,0,0,5,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-Brian,Fu,2,1,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+F_NAME,L_NAME,ID,teamID,NUMBER,GP,PA,R,H,1B,2B,3B,HR,RBI,BB,HBP,SO,SB,R_GivenUp,SO_Pitched,BB_Allowed,H_Allowed,IP
+Christopher,Min,1,1,17,5,7,3,4,2,1,1,0,5,0,0,3,3,7,7,3,5,3,6.0

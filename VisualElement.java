@@ -162,6 +162,7 @@ class TextField extends VisualElement {
     public String getText() {
         return textField.getText();
     }
+    
 
     public void emptyText() {
         textField.setText(null);
@@ -170,12 +171,28 @@ class TextField extends VisualElement {
 
 class NumberTextField extends VisualElement {
     protected JFormattedTextField numberTextField;
+    protected NumberFormatter numberFormatter;
+/* 
+    public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font, String display, boolean fixed) {
+        super(id, xPosition, yPosition, width, height, bgColor);
+        this.type = "Number Text Field";
 
+        numberFormatter = new NumberFormatter(NumberFormat.getInstance());
+        numberTextField = new JFormattedTextField(numberFormatter);
+        numberTextField.setFont(font);
+        numberTextField.setValue(new Double(display));
+        if (fixed) {
+            numberTextField.setEditable(false);
+        }
+        this.component = numberTextField;
+        makeVisible();
+    }
+    */
     public NumberTextField(String id, int xPosition, int yPosition, int width, int height, Color bgColor, Font font) {
         super(id, xPosition, yPosition, width, height, bgColor);
         this.type = "Number Text Field";
 
-        NumberFormatter numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance()) {
+        numberFormatter = new NumberFormatter(NumberFormat.getIntegerInstance()) {
             @Override
             public Object stringToValue(String text) throws ParseException {
                 if (text.length() == 0) {
@@ -190,6 +207,11 @@ class NumberTextField extends VisualElement {
         this.component = numberTextField;
         makeVisible();
     }
+
+    public String getText(){
+        return numberTextField.getText();
+    }
+
 }
 
 class TextArea extends VisualElement {
@@ -294,15 +316,22 @@ class DropdownChooser extends InteractableObject {
         return comboBox;
     }
 
+
     public void updatePlayerItems(HashMap<Integer, Player> currentPlayers) {
-        comboBox.removeAllItems();
+        System.out.println("updatePlayerItems called");
+        if (!currentPlayers.isEmpty()) {
+            this.comboBox.removeAllItems();
+        }
 
         for (HashMap.Entry<Integer, Player> entry : currentPlayers.entrySet()) {
             Player currentPlayer = entry.getValue();
-            comboBox.addItem(currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
+            if (currentPlayer != null) {
+                comboBox.addItem(currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
+            }
         }
     }
 
+    
     public void updateTeamItems(){
         
         HashMap<Integer, Team> currentTeams = Main.getTeams();
@@ -350,6 +379,15 @@ class Button extends InteractableTextField {
 
     public ActionListener getAction() {
         return actionListener;
+    }
+}
+
+class ExitButton extends InteractablePicture {
+    public ExitButton(String id, String filepath, int xPosition, int yPosition, int width, int height, Color bgColor, ActionListener actionListener) throws IOException {
+        super(id, filepath, xPosition, yPosition, width, height, bgColor, actionListener);
+        this.type = "Exit Button";
+
+        imageButton.setActionCommand("EXIT");
     }
 }
 

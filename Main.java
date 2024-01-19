@@ -37,6 +37,11 @@ public class Main {
 
     // METHODS 
     //------------------------------------------------------------------------------
+    public static int generatePlayerID(){
+        int newPlayerID = 1;
+        while(players.get(newPlayerID) != null){newPlayerID++;}
+        return newPlayerID;
+    }
     public static int generateTeamID(){
         int newTeamID = 1;
         while (league.get(newTeamID) != null){newTeamID++;}
@@ -61,23 +66,6 @@ public class Main {
         Application softballTracker = new Application();
         softballTracker.runApplication();
 
-        /*Team blueJays = createTeam("Blue Jays");
-        blueJays.addPlayer("Christopher", "Min", 15);
-        blueJays.addPlayer("Brian", "Fu", 16);
-        blueJays.setWins(5);
-        blueJays.setLosses(3);
-        blueJays.setRunsAgainst(10);
-        blueJays.setRunsScored(30);
-        System.out.println(blueJays.toString());
-
-        int p1ID = blueJays.getPlayerID(15);
-
-        players.get(p1ID).setHits(5);
-        players.get(p1ID).setStrikeouts(3);
-        */
-
-        //FileWriterTeam.writer(teamsFile);
-        //FileWriterPlayer.writer(playersFile);
     }
 
 

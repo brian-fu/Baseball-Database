@@ -132,7 +132,7 @@ public class Team {
         int newPlayerID = 1;
         while(players.get(newPlayerID) != null){newPlayerID++;}
 
-        Player newPlayer = new Player(firstName, lastName, newPlayerID, teamID, jerseyNumber, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        Player newPlayer = new Player(firstName, lastName, newPlayerID, teamID, jerseyNumber, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0);
         
         Main.addPlayer(newPlayerID, newPlayer);
         rosterHashMap.put(newPlayerID, newPlayer);
