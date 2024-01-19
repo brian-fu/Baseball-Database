@@ -10,13 +10,16 @@ public class Window {
     private int width;
     private int height;
 
-    public Window(String id, int height, int width) {
+    private boolean initialize;
+
+    public Window(String id, int height, int width, boolean initialize) {
         window = new JPanel();
         window.setLayout(null);
         
         this.id = id;
         this.width = width;
         this.height = height;
+        this.initialize = initialize;
 
         window.setBounds(0, 0, height, width);
         window.setBackground(backgroundColor);
@@ -34,5 +37,9 @@ public class Window {
 
     public JPanel getPanel() {
         return window;
+    }
+
+    public boolean getInitialize() {
+        return initialize;
     }
 }
